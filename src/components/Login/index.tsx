@@ -1,8 +1,6 @@
 import Nav from "../Nav";
 
 function Login() {
-
-
     return (
         <>
             <Nav></Nav>
@@ -10,7 +8,6 @@ function Login() {
         </>
 
     )
-
 }
 
 export default Login;

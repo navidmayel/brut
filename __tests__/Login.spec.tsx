@@ -2,11 +2,11 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import Login from '../src/components/Login';
 
-describe('Login health', () => {
+describe('Login healthcheck', () => {
     it('Login renders successfully', () => {
         render(
             <Login />
         );
-        expect(screen.getByTest(/brut/)).toBeInDocument();
+        expect(screen.getByText(/Brut/)).toBeInTheDocument();
     });
 });
