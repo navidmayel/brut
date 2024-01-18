@@ -1,8 +1,10 @@
-function TrackInfo() {
+interface IProps{
+    displayName?: string | null;
+}
+
+const TrackInfo:React.FC<IProps> = ({displayName}) => {
     return (
-        <>
-            <h1>Hello authorised user</h1>
-        </>
+            <h1>Hello {displayName}</h1>
     )
 }
 
