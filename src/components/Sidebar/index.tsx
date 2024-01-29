@@ -1,13 +1,20 @@
 import Select from "react-select";
+import Controls from "../Controls";
+import TrackImage from "../TrackImage";
+import { ITrack } from "../../types";
+import {ControlContainer}  from "./styles";
 
 interface IProps {
     playlists: Array<string>;
     getTracks: any;
-
+    token: string | null;
+    tracks: Array<string>;
+    track: ITrack;
+    setTrack: React.Dispatch<React.SetStateAction<ITrack | null>>;
 }
 
 
-const Sidebar:React.FC<IProps> = ({ playlists, getTracks }) => {
+const Sidebar:React.FC<IProps> = ({ playlists, getTracks, token, tracks, track, setTrack }) => {
 
 const styles = {
     menuList: (styles:any) => {
@@ -30,7 +37,15 @@ const styles = {
     }
 
     return (
+        <>
+        <ControlContainer>
+        <Controls
+        token={token}
+        tracks={tracks}
+        setTrack={setTrack}
+        />
         <Select 
+        menuPlacement="auto"
         options={playlists}
         getOptionLabel={(e:any) => e.name}
         styles={styles}
@@ -45,6 +60,10 @@ const styles = {
 
         })}
         />
+        <TrackImage track={track} />
+        </ControlContainer>
+       
+        </>
     )
 }
 

@@ -8,6 +8,8 @@ export const GlobalStyle = createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
         font-weight: normal;
+        height: 100%;
+        overflow: hidden;
     }
 
     h1 {

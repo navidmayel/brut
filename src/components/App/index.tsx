@@ -7,6 +7,7 @@ import { getAccessToken } from "../../auth";
 import axios from "axios";
 import { GlobalStyle } from "../../styles";
 import { Container, TrackViewer, Side } from "./styles";
+import { ITrack } from "../../types";
 
 function App() {
 
@@ -15,7 +16,8 @@ function App() {
 	const [token, setToken] = useState<string | null>(null);
 	const [profile, setProfile] = useState<string | null>(null);
 	const [playlists, setPlaylists] = useState([]);
-	const [tracks, setTracks] = useState<string | null>(null);
+	const [tracks, setTracks] = useState<Array<string> | null>(null);
+	const [track, setTrack] = useState<ITrack>();
 	const [displayName, setDisplayName] = useState<string | null>(null);
 	
 	const clientId = import.meta.env.VITE_CLIENT_ID;
@@ -73,7 +75,9 @@ function App() {
 				"Content-type": "application/json"
 			},
 		}) 
-		console.log(data)
+		console.log(Object.entries(data.items))
+		const uris = Object.entries(data.items).map(([key, value]) => value.track.uri);
+		setTracks(uris);
 	}
 
 
@@ -92,12 +96,18 @@ function App() {
 		<Nav profile={profile}></Nav>
 		<Container>
 		<TrackViewer>
-		<TrackInfo displayName={displayName}></TrackInfo>	
+		<TrackInfo 
+		displayName={displayName} 
+		track={track} />
 		</TrackViewer>
 		<Side>
 			<Sidebar 
+			track={track}
+			token={token}
+			tracks={tracks}
 			playlists={playlists} 
 			getTracks={getTracks}
+			setTrack={setTrack}
 			/>
 			</Side>
 		</Container>
